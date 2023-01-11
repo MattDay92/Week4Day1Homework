@@ -55,17 +55,75 @@ FROM address
 
 
 -- 7. What film has the most actors in it? (use film_actor table and get film_id)
-    --Answer:
+    --Answer:  film_id = 508
+    --         Film Title:  lambs Cincinatti
 
+SELECT film_id, COUNT(actor_id)
+FROM film_actor
+GROUP BY film_id
+ORDER BY COUNT(actor_id) DESC;
+
+SELECT title, film_id
+FROM film
+WHERE film_id = '508';
 
 
 -- 8. From store_id 1, how many customers have a last name ending with ‘es’? (use customer table)
-    --Answer:
+    --Answer:  2
+
+SELECT first_name, store_id
+FROM customer
+WHERE first_name LIKE '%es'
+ORDER BY store_id DESC;
+
 
 -- 9. How many payment amounts (4.99, 5.99, etc.) had a number of rentals above 250 for customers
 -- with ids between 380 and 430? (use group by and having > 250)
-    --Answer:
+    --Answer: 3
+
+SELECT amount
+FROM payment
+WHERE customer_id > 380 and customer_id < 430
+GROUP BY amount
+HAVING COUNT(rental_id) > 250
+ORDER BY amount DESC;
+
+
 
 -- 10. Within the film table, how many rating categories are there? And what rating has the most
 -- movies total?
-    --Answer:
+    --Answer:  5 rating categories
+    --         PG-13 with 223 total movies
+
+SELECT count(DISTINCT rating)
+FROM film
+
+SELECT rating
+FROM film
+
+SELECT COUNT(title)
+FROM film
+WHERE rating = 'R'
+-- 195
+
+SELECT COUNT(title)
+FROM film
+WHERE rating = 'PG-13'
+-- 223
+
+SELECT COUNT(title)
+FROM film
+WHERE rating = 'G'
+-- 178
+
+SELECT COUNT(title)
+FROM film
+WHERE rating = 'NC-17'
+-- 209
+
+SELECT COUNT(title)
+FROM film
+WHERE rating = 'PG'
+-- 194
+
+
